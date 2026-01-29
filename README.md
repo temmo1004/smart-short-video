@@ -18,7 +18,8 @@
 
 ```bash
 # 下載並解壓縮到 Claude Code skills 目錄
-tar -xzf packages/smart-short-video-skill.tar.gz -D ~/.claude/skills/
+wget https://github.com/temmo1004/smart-short-video/raw/main/packages/smart-short-video-skill.tar.gz
+tar -xzf smart-short-video-skill.tar.gz -D ~/.claude/skills/
 ```
 
 ### 選項 2: 直接下載 SKILL.md
@@ -40,6 +41,41 @@ tar -xzf packages/smart-short-video-skill.tar.gz -D ~/.claude/skills/
 | GLM | glm-image | 智譜 AI，需要 API Key |
 | Pollinations.ai | - | 免費，無需 API Key |
 | DALL-E | dall-e-3 | OpenAI，需要 API Key |
+
+## 🎙️ Whisper 本地模型選擇
+
+### 模型比較
+
+| 模型 | 大小 | 速度 | 準確度 | 推薦用途 |
+|------|------|------|--------|----------|
+| **large-v3-turbo** | ~3GB | ⚡ 快 | ⭐⭐⭐⭐⭐ | **推薦** 最佳平衡 |
+| large-v3 | ~3GB | 🐢 慢 | ⭐⭐⭐⭐⭐ | 最高準確度 |
+| medium | ~1.5GB | ⚡ 快 | ⭐⭐⭐ | 一般用途 |
+| small | ~500MB | ⚡⚡ 很快 | ⭐⭐ | 快速處理 |
+| base | ~150MB | ⚡⚡⚡ 極快 | ⭐ | 草稿級 |
+
+### 安裝 Whisper
+
+```bash
+# 安裝 OpenAI Whisper
+pip3 install openai-whisper
+
+# 驗證安裝
+python3 -m whisper --help
+```
+
+### 使用方式
+
+```bash
+# 推薦：large-v3-turbo (速度與準確度最佳平衡)
+python3 -m whisper video.mp4 --model large-v3-turbo --output_format json --language Zh
+
+# 最高準確度：large-v3
+python3 -m whisper video.mp4 --model large-v3 --output_format json --language Zh
+
+# 快速處理：medium
+python3 -m whisper video.mp4 --model medium --output_format json --language Zh
+```
 
 ## GLM API 配置
 
