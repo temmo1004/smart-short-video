@@ -77,6 +77,44 @@ questions:
 | `openai_api_key` | OpenAI API 金鑰 (用於 DALL-E 或 Whisper API) |
 | `glm_api_key` | GLM (智譜 AI) API 金鑰 (用於 glm-image 模型) |
 | `ai_image_service` | AI 生圖服務 (pollinations/glm/dalle) |
+| `whisper_model` | Whisper 模型選擇 (large-v3-turbo/medium/small/base) |
+
+---
+
+## 🎙️ Whisper 本地模型選擇
+
+### 模型比較
+
+| 模型 | 大小 | 速度 | 準確度 | 推薦用途 |
+|------|------|------|--------|----------|
+| **large-v3-turbo** | ~3GB | ⚡ 快 | ⭐⭐⭐⭐⭐ | **推薦** 最佳平衡 |
+| large-v3 | ~3GB | 🐢 慢 | ⭐⭐⭐⭐⭐ | 最高準確度 |
+| medium | ~1.5GB | ⚡ 快 | ⭐⭐⭐ | 一般用途 |
+| small | ~500MB | ⚡⚡ 很快 | ⭐⭐ | 快速處理 |
+| base | ~150MB | ⚡⚡⚡ 極快 | ⭐ | 草稿級 |
+
+### 安裝 Whisper
+
+```bash
+# 安裝 OpenAI Whisper
+pip3 install openai-whisper
+
+# 驗證安裝
+python3 -m whisper --help
+```
+
+### 使用方式
+
+```bash
+# 推薦：large-v3-turbo (速度與準確度最佳平衡)
+python3 -m whisper video.mp4 --model large-v3-turbo --output_format json --language Zh
+
+# 最高準確度：large-v3
+python3 -m whisper video.mp4 --model large-v3 --output_format json --language Zh
+
+# 快速處理：medium
+python3 -m whisper video.mp4 --model medium --output_format json --language Zh
+```
 
 ---
 
